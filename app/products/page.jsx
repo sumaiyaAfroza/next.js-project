@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export default async function Products() {
-    const res = await fetch('https://next-js-project-bz6n.vercel.app/api/items')
+    const res = await fetch('https://next-js-project-zeta-ten.vercel.app/api/items')
     const {data} = await res.json()
     // console.log(data)
 
