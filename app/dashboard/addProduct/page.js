@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Swal from 'sweetalert2';
 
 const ProductForm = () => {
     const [products, setProducts] = useState([]);
@@ -26,41 +27,49 @@ const ProductForm = () => {
             return;
         }
 
-        // Add new product
         const newProduct = {
             name,
             description,
             price: Number(price),
         };
-        // console.log(newProduct)
-         try {
-             const response = await fetch('http://localhost:3000/api/items',{
-                 method: 'POST',
-                 body: JSON.stringify({
-                     ...newProduct
-                 }),
-                 headers: {
-                     'Content-Type' : 'application/json'
-                 }
-             })
-             const result = await response.json()
-             console.log(result)
 
-         }
-         catch (error) {
-             console.error(error)
+        try {
+            const response = await fetch('http://localhost:3000/api/items', {
+                method: 'POST',
+                body: JSON.stringify(newProduct),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-         }
+            const result = await response.json();
+            console.log(result);
 
-        setProducts([...products, newProduct]);
-        setName('');
-        setDescription('');
-        setPrice('');
-        setError('');
-    };
+            // Success Alert
+            Swal.fire({
+                title: "Success!",
+                text: "Product has been added successfully.",
+                icon: "success",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK"
+            });
 
-    const handleDetailsClick = (product) => {
-        alert(`Details for ${product.name}:\nDescription: ${product.description}\nPrice: $${product.price}`);
+            setProducts([...products, newProduct]);
+            setName('');
+            setDescription('');
+            setPrice('');
+            setError('');
+
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                title: "Error!",
+                text: "Something went wrong while adding the product.",
+                icon: "error",
+                confirmButtonColor: "#d33",
+                confirmButtonText: "Try Again"
+            });
+        }
     };
 
     return (
@@ -115,30 +124,6 @@ const ProductForm = () => {
                     </form>
                 </CardContent>
             </Card>
-
-            {/*<div className="mt-8">*/}
-            {/*    <h2 className="text-2xl font-bold mb-4">Products</h2>*/}
-            {/*    {products.length === 0 ? (*/}
-            {/*        <p className="text-gray-500">No products added yet.</p>*/}
-            {/*    ) : (*/}
-            {/*        <div className="grid gap-4">*/}
-            {/*            {products.map((product) => (*/}
-            {/*                <Card key={product.id}>*/}
-            {/*                    <CardContent className="flex justify-between items-center pt-6">*/}
-            {/*                        <div>*/}
-            {/*                            <h3 className="text-lg font-semibold">{product.name}</h3>*/}
-            {/*                            <p className="text-gray-600">{product.description}</p>*/}
-            {/*                            <p className="text-gray-800 font-medium">${product.price}</p>*/}
-            {/*                        </div>*/}
-            {/*                        <Button variant="outline" onClick={() => handleDetailsClick(product)}>*/}
-            {/*                            Details*/}
-            {/*                        </Button>*/}
-            {/*                    </CardContent>*/}
-            {/*                </Card>*/}
-            {/*            ))}*/}
-            {/*        </div>*/}
-            {/*    )}*/}
-            {/*</div>*/}
         </div>
     );
 };
