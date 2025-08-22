@@ -13,8 +13,8 @@ export default async function Products() {
                         <h3 className="text-xl font-semibold text-gray-900 mb-2">{singleData.name}</h3>
                         <p className="text-gray-600 mb-4">{singleData.description}</p>
                         <div className="flex items-center justify-between">
-                            <p className="text-2xl font-bold text-blue-600">${singleData.price}</p>
-                            <Link href={`/products/${singleData._id}`} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
+                            <p className="text-2xl font-bold text-green-700-600">${singleData.price}</p>
+                            <Link href={`/products/${singleData._id}`} className="bg-green-700 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
                                 Details
                             </Link>
                         </div>
