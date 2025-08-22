@@ -34,7 +34,7 @@ const ProductForm = () => {
         };
 
         try {
-            const response = await fetch('https://next-js-project-zeta-ten.vercel.app/api/items', {
+            const response = await fetch('https://next-js-project-bz6n.vercel.app/api/items', {
                 method: 'POST',
                 body: JSON.stringify(newProduct),
                 headers: {
