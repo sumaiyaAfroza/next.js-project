@@ -13,7 +13,7 @@ const ProductForm = () => {
     const [price, setPrice] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Validation
@@ -28,11 +28,29 @@ const ProductForm = () => {
 
         // Add new product
         const newProduct = {
-            id: products.length + 1,
             name,
             description,
             price: Number(price),
         };
+        // console.log(newProduct)
+         try {
+             const response = await fetch('http://localhost:3000/api/items',{
+                 method: 'POST',
+                 body: JSON.stringify({
+                     ...newProduct
+                 }),
+                 headers: {
+                     'Content-Type' : 'application/json'
+                 }
+             })
+             const result = await response.json()
+             console.log(result)
+
+         }
+         catch (error) {
+             console.error(error)
+
+         }
 
         setProducts([...products, newProduct]);
         setName('');
@@ -98,29 +116,29 @@ const ProductForm = () => {
                 </CardContent>
             </Card>
 
-            <div className="mt-8">
-                <h2 className="text-2xl font-bold mb-4">Products</h2>
-                {products.length === 0 ? (
-                    <p className="text-gray-500">No products added yet.</p>
-                ) : (
-                    <div className="grid gap-4">
-                        {products.map((product) => (
-                            <Card key={product.id}>
-                                <CardContent className="flex justify-between items-center pt-6">
-                                    <div>
-                                        <h3 className="text-lg font-semibold">{product.name}</h3>
-                                        <p className="text-gray-600">{product.description}</p>
-                                        <p className="text-gray-800 font-medium">${product.price}</p>
-                                    </div>
-                                    <Button variant="outline" onClick={() => handleDetailsClick(product)}>
-                                        Details
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
-                )}
-            </div>
+            {/*<div className="mt-8">*/}
+            {/*    <h2 className="text-2xl font-bold mb-4">Products</h2>*/}
+            {/*    {products.length === 0 ? (*/}
+            {/*        <p className="text-gray-500">No products added yet.</p>*/}
+            {/*    ) : (*/}
+            {/*        <div className="grid gap-4">*/}
+            {/*            {products.map((product) => (*/}
+            {/*                <Card key={product.id}>*/}
+            {/*                    <CardContent className="flex justify-between items-center pt-6">*/}
+            {/*                        <div>*/}
+            {/*                            <h3 className="text-lg font-semibold">{product.name}</h3>*/}
+            {/*                            <p className="text-gray-600">{product.description}</p>*/}
+            {/*                            <p className="text-gray-800 font-medium">${product.price}</p>*/}
+            {/*                        </div>*/}
+            {/*                        <Button variant="outline" onClick={() => handleDetailsClick(product)}>*/}
+            {/*                            Details*/}
+            {/*                        </Button>*/}
+            {/*                    </CardContent>*/}
+            {/*                </Card>*/}
+            {/*            ))}*/}
+            {/*        </div>*/}
+            {/*    )}*/}
+            {/*</div>*/}
         </div>
     );
 };
