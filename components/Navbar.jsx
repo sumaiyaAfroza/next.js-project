@@ -1,6 +1,8 @@
 "use client";
 
 import {Book, Menu, Sunset, Trees, Zap} from "lucide-react";
+import food from '@/public/food.jpg'
+
 
 import {
     Accordion,
@@ -26,12 +28,13 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import {signOut, useSession} from "next-auth/react";
+import Image from "next/image";
 
 
 const Navbar = ({
                      logo = {
                          url: "/",
-                         src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
+                         src: food,
                          alt: "logo",
                          // title: "Shadcnblocks.com",
                      },
@@ -63,11 +66,12 @@ const Navbar = ({
                     <div className='flex ml-20 gap-96 '>
                         {/* Logo */}
                         <Link href={logo.url} className="flex items-center gap-2">
-                            <img
+                            <Image
                                 src={logo.src}
-                                className="max-h-8 dark:invert"
+                                className="max-h-10 w-16 dark:invert"
                                 alt={logo.alt}
                             />
+
                         </Link>
 
                         <div className="flex items-center">
