@@ -3,8 +3,6 @@
 import React from 'react'
 import {FaGoogle} from "react-icons/fa";
 import {signIn} from "next-auth/react";
-import {redirect} from "next/navigation";
-
 
 export default function SocialLogin() {
 const handleGoogle =async providerName => {
