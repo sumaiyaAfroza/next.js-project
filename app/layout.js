@@ -4,7 +4,8 @@ import "./globals.css";
 import {Footer} from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import {Hero} from "@/components/Hero";
-import {Link} from "@radix-ui/react-navigation-menu";
+import Provider from "@/components/providers/SessionProvider";
+
 
 
 
@@ -28,9 +29,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}  >
 
-        <Navbar></Navbar>
-      {children}
-      <Footer></Footer>
+      <Provider>
+          <Navbar></Navbar>
+          {children}
+          <Footer></Footer>
+      </Provider>
 
       </body>
     </html>

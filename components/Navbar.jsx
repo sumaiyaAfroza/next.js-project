@@ -25,6 +25,8 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import {signOut, useSession} from "next-auth/react";
+
 
 const Navbar = ({
                      logo = {
@@ -48,9 +50,11 @@ const Navbar = ({
                      ],
                      auth = {
                          login: {title: "Login", url: "/login"},
-                         signup: {title: "Sign up", url: "#"},
                      },
                  }) => {
+    const {data:session, status} = useSession()
+    // console.log(session)
+
     return (
         <section className="py-4">
             <div className="container">
@@ -78,12 +82,21 @@ const Navbar = ({
 
 
                     <div className="flex gap-2">
-                        <Button asChild variant="outline" size="sm">
-                            <Link href={auth.login.url}>{auth.login.title}</Link>
-                        </Button>
-                        <Button asChild size="sm">
-                            <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                        </Button>
+                        {
+                            status === 'authenticated' ? (
+                                    <>
+                                        <button onClick={()=> signOut({callbackUrl: '/login'})}>
+                                            Logout
+                                        </button>
+                                    </>
+                                ) :
+                                <>
+                                    <Button asChild variant="outline">
+                                        <Link href={auth.login.url}>{auth.login.title}</Link>
+                                    </Button>
+                                </>
+                        }
+
                     </div>
                 </nav>
 
@@ -126,12 +139,20 @@ const Navbar = ({
                                     </Accordion>
 
                                     <div className="flex flex-col gap-3">
-                                        <Button asChild variant="outline">
-                                            <Link href={auth.login.url}>{auth.login.title}</Link>
-                                        </Button>
-                                        <Button asChild>
-                                            <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                                        </Button>
+                                        {
+                                            status === 'authenticated' ? (
+                                                <>
+                                                    <button onClick={()=> signOut({callbackUrl: '/login'})}>
+                                                        Logout
+                                                    </button>
+                                                </>
+                                            ) :
+                                                <>
+                                                    <Button asChild variant="outline">
+                                                        <Link href={auth.login.url}>{auth.login.title}</Link>
+                                                    </Button>
+                                                </>
+                                        }
                                     </div>
                                 </div>
                             </SheetContent>

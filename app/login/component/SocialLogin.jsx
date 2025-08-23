@@ -9,7 +9,7 @@ import {redirect} from "next/navigation";
 export default function SocialLogin() {
 const handleGoogle =async providerName => {
     // console.log(providerName)
-    const result = await  signIn(providerName,{redirect:false})
+    const result = await  signIn(providerName,{callbackUrl: '/'})
     console.log(result)
 }
 
