@@ -1,8 +1,6 @@
 "use client";
-
-import {Book, Menu, Sunset, Trees, Zap} from "lucide-react";
+import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
 import food from '@/public/food.jpg'
-
 
 import {
     Accordion,
@@ -10,13 +8,12 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
     NavigationMenu,
     NavigationMenuContent,
     NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
+    NavigationMenuLink, NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
@@ -27,43 +24,41 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
-import {signOut, useSession} from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
-
 const Navbar = ({
-                     logo = {
-                         url: "/",
-                         src: food,
-                         alt: "logo",
-                         // title: "Shadcnblocks.com",
-                     },
-                     menu = [
-                         {title: "Home", url: "/"},
-                         {title: "Products", url: "/products"},
-                         {
-                             title: "Dashboard",
-                             items: [
-                                 {
-                                     title: "Add Product", url: "/dashboard/addProduct",
-                                     icon: <Zap className="size-5 shrink-0" />,
-                                 },
-                             ],
-                         },
-                     ],
-                     auth = {
-                         login: {title: "Login", url: "/login"},
-                     },
-                 }) => {
-    const {data:session, status} = useSession()
-    // console.log(session)
+                    logo = {
+                        url: "/",
+                        src: food,
+                        alt: "logo",
+                    },
+                    menu = [
+                        { title: "Home", url: "/" },
+                        { title: "Products", url: "/products" },
+                        {
+                            title: "Dashboard",
+                            items: [
+                                {
+                                    title: "Add Product",
+                                    url: "/dashboard/addProduct",
+                                    icon: <Zap className="size-5 shrink-0" />,
+                                },
+                            ],
+                        },
+                    ],
+                    auth = {
+                        login: { title: "Login", url: "/login" },
+                    },
+                }) => {
+    const { data: session, status } = useSession();
 
     return (
-        <section className="py-4">
+        <section className="py-4 bg-gradient-to-b from-orange-50 to-amber-100">
             <div className="container">
                 {/* Desktop Menu */}
                 <nav className="hidden justify-between lg:flex">
-                    <div className='flex ml-20 gap-96 '>
+                    <div className="flex ml-20 gap-96">
                         {/* Logo */}
                         <Link href={logo.url} className="flex items-center gap-2">
                             <Image
@@ -71,7 +66,6 @@ const Navbar = ({
                                 className="max-h-10 w-16 dark:invert"
                                 alt={logo.alt}
                             />
-
                         </Link>
 
                         <div className="flex items-center">
@@ -83,24 +77,27 @@ const Navbar = ({
                         </div>
                     </div>
 
-
-
                     <div className="flex gap-2">
-                        {
-                            status === 'authenticated' ? (
-                                    <>
-                                        <button onClick={()=> signOut({callbackUrl: '/login'})}>
-                                            Logout
-                                        </button>
-                                    </>
-                                ) :
-                                <>
-                                    <Button asChild variant="outline">
-                                        <Link href={auth.login.url}>{auth.login.title}</Link>
-                                    </Button>
-                                </>
-                        }
-
+                        {status === "authenticated" ? (
+                            <>
+                                <Button
+                                    onClick={() => signOut({ callbackUrl: "/login" })}
+                                    className="bg-orange-500 hover:bg-orange-600 text-white"
+                                >
+                                    Logout
+                                </Button>
+                            </>
+                        ) : (
+                            <>
+                                <Button
+                                    asChild
+                                    variant="outline"
+                                    className="border-orange-500 text-orange-500 hover:bg-orange-100"
+                                >
+                                    <Link href={auth.login.url}>{auth.login.title}</Link>
+                                </Button>
+                            </>
+                        )}
                     </div>
                 </nav>
 
@@ -117,11 +114,15 @@ const Navbar = ({
                         </Link>
                         <Sheet>
                             <SheetTrigger asChild>
-                                <Button variant="outline" size="icon">
-                                    <Menu className="size-4"/>
+                                <Button
+                                    variant="outline"
+                                    size="icon"
+                                    className="border-orange-500 text-orange-500 hover:bg-orange-100"
+                                >
+                                    <Menu className="size-4" />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent className="overflow-y-auto">
+                            <SheetContent className="bg-amber-50 overflow-y-auto">
                                 <SheetHeader>
                                     <SheetTitle>
                                         <Link href={logo.url} className="flex items-center gap-2">
@@ -143,20 +144,26 @@ const Navbar = ({
                                     </Accordion>
 
                                     <div className="flex flex-col gap-3">
-                                        {
-                                            status === 'authenticated' ? (
-                                                <>
-                                                    <button onClick={()=> signOut({callbackUrl: '/login'})}>
-                                                        Logout
-                                                    </button>
-                                                </>
-                                            ) :
-                                                <>
-                                                    <Button asChild variant="outline">
-                                                        <Link href={auth.login.url}>{auth.login.title}</Link>
-                                                    </Button>
-                                                </>
-                                        }
+                                        {status === "authenticated" ? (
+                                            <>
+                                                <Button
+                                                    onClick={() => signOut({ callbackUrl: "/login" })}
+                                                    className="bg-orange-500 hover:bg-orange-600 text-white"
+                                                >
+                                                    Logout
+                                                </Button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Button
+                                                    asChild
+                                                    variant="outline"
+                                                    className="border-orange-500 text-orange-500 hover:bg-orange-100"
+                                                >
+                                                    <Link href={auth.login.url}>{auth.login.title}</Link>
+                                                </Button>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </SheetContent>
@@ -172,11 +179,13 @@ const renderMenuItem = (item) => {
     if (item.items) {
         return (
             <NavigationMenuItem key={item.title}>
-                <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-popover text-popover-foreground">
+                <NavigationMenuTrigger className="bg-amber-50 text-orange-900 hover:bg-orange-100">
+                    {item.title}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-amber-50 text-orange-900">
                     {item.items.map((subItem) => (
                         <NavigationMenuLink asChild key={subItem.title} className="w-80">
-                            <SubMenuLink item={subItem}/>
+                            <SubMenuLink item={subItem} />
                         </NavigationMenuLink>
                     ))}
                 </NavigationMenuContent>
@@ -188,7 +197,7 @@ const renderMenuItem = (item) => {
         <NavigationMenuItem key={item.title}>
             <NavigationMenuLink
                 href={item.url}
-                className="bg-background hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
+                className="bg-amber-50 text-orange-900 hover:bg-orange-100 hover:text-orange-600 group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
             >
                 {item.title}
             </NavigationMenuLink>
@@ -200,12 +209,12 @@ const renderMobileMenuItem = (item) => {
     if (item.items) {
         return (
             <AccordionItem key={item.title} value={item.title} className="border-b-0">
-                <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
+                <AccordionTrigger className="text-md py-0 font-semibold text-orange-900 hover:text-orange-600 hover:no-underline">
                     {item.title}
                 </AccordionTrigger>
                 <AccordionContent className="mt-2">
                     {item.items.map((subItem) => (
-                        <SubMenuLink key={subItem.title} item={subItem}/>
+                        <SubMenuLink key={subItem.title} item={subItem} />
                     ))}
                 </AccordionContent>
             </AccordionItem>
@@ -213,23 +222,27 @@ const renderMobileMenuItem = (item) => {
     }
 
     return (
-        <a key={item.title} href={item.url} className="text-md font-semibold">
+        <a
+            key={item.title}
+            href={item.url}
+            className="text-md font-semibold text-orange-900 hover:text-orange-600"
+        >
             {item.title}
         </a>
     );
 };
 
-const SubMenuLink = ({item}) => {
+const SubMenuLink = ({ item }) => {
     return (
         <a
-            className="hover:bg-muted hover:text-accent-foreground flex select-none flex-row gap-4 rounded-md p-3 leading-none no-underline outline-none transition-colors"
+            className="hover:bg-orange-100 hover:text-orange-600 flex select-none flex-row gap-4 rounded-md p-3 leading-none no-underline outline-none transition-colors"
             href={item.url}
         >
-            <div className="text-foreground">{item.icon}</div>
+            <div className="text-orange-900">{item.icon}</div>
             <div>
-                <div className="text-sm font-semibold">{item.title}</div>
+                <div className="text-sm font-semibold text-orange-900">{item.title}</div>
                 {item.description && (
-                    <p className="text-muted-foreground text-sm leading-snug">
+                    <p className="text-orange-700 text-sm leading-snug">
                         {item.description}
                     </p>
                 )}
@@ -239,3 +252,244 @@ const SubMenuLink = ({item}) => {
 };
 
 export default Navbar;
+
+
+
+// "use client";
+// import {Book, Menu, Sunset, Trees, Zap} from "lucide-react";
+// import food from '@/public/food.jpg'
+//
+// import {
+//     Accordion,
+//     AccordionContent,
+//     AccordionItem,
+//     AccordionTrigger,
+// } from "@/components/ui/accordion";
+// import {Button} from "@/components/ui/button";
+// import {
+//     NavigationMenu,
+//     NavigationMenuContent,
+//     NavigationMenuItem,
+//     NavigationMenuLink,
+//     NavigationMenuList,
+//     NavigationMenuTrigger,
+// } from "@/components/ui/navigation-menu";
+// import {
+//     Sheet,
+//     SheetContent,
+//     SheetHeader,
+//     SheetTitle,
+//     SheetTrigger,
+// } from "@/components/ui/sheet";
+// import Link from "next/link";
+// import {signOut, useSession} from "next-auth/react";
+// import Image from "next/image";
+//
+//
+// const Navbar = ({
+//                      logo = {
+//                          url: "/",
+//                          src: food,
+//                          alt: "logo",
+//                          // title: "Shadcnblocks.com",
+//                      },
+//                      menu = [
+//                          {title: "Home", url: "/"},
+//                          {title: "Products", url: "/products"},
+//                          {
+//                              title: "Dashboard",
+//                              items: [
+//                                  {
+//                                      title: "Add Product", url: "/dashboard/addProduct",
+//                                      icon: <Zap className="size-5 shrink-0" />,
+//                                  },
+//                              ],
+//                          },
+//                      ],
+//                      auth = {
+//                          login: {title: "Login", url: "/login"},
+//                      },
+//                  }) => {
+//     const {data:session, status} = useSession()
+//     // console.log(session)
+//
+//     return (
+//         <section className="py-4">
+//             <div className="container">
+//                 {/* Desktop Menu */}
+//                 <nav className="hidden justify-between lg:flex">
+//                     <div className='flex ml-20 gap-96 '>
+//                         {/* Logo */}
+//                         <Link href={logo.url} className="flex items-center gap-2">
+//                             <Image
+//                                 src={logo.src}
+//                                 className="max-h-10 w-16 dark:invert"
+//                                 alt={logo.alt}
+//                             />
+//                         </Link>
+//
+//                         <div className="flex items-center">
+//                             <NavigationMenu>
+//                                 <NavigationMenuList>
+//                                     {menu.map((item) => renderMenuItem(item))}
+//                                 </NavigationMenuList>
+//                             </NavigationMenu>
+//                         </div>
+//                     </div>
+//
+//
+//
+//                     <div className="flex gap-2">
+//                         {
+//                             status === 'authenticated' ? (
+//                                     <>
+//                                         <button onClick={()=> signOut({callbackUrl: '/login'})}>
+//                                             Logout
+//                                         </button>
+//                                     </>
+//                                 ) :
+//                                 <>
+//                                     <Button asChild variant="outline">
+//                                         <Link href={auth.login.url}>{auth.login.title}</Link>
+//                                     </Button>
+//                                 </>
+//                         }
+//
+//                     </div>
+//                 </nav>
+//
+//                 {/* Mobile Menu */}
+//                 <div className="block lg:hidden">
+//                     <div className="flex items-center justify-between">
+//                         {/* Logo */}
+//                         <Link href={logo.url} className="flex items-center gap-2">
+//                             <img
+//                                 src={logo.src}
+//                                 className="max-h-8 dark:invert"
+//                                 alt={logo.alt}
+//                             />
+//                         </Link>
+//                         <Sheet>
+//                             <SheetTrigger asChild>
+//                                 <Button variant="outline" size="icon">
+//                                     <Menu className="size-4"/>
+//                                 </Button>
+//                             </SheetTrigger>
+//                             <SheetContent className="overflow-y-auto">
+//                                 <SheetHeader>
+//                                     <SheetTitle>
+//                                         <Link href={logo.url} className="flex items-center gap-2">
+//                                             <img
+//                                                 src={logo.src}
+//                                                 className="max-h-8 dark:invert"
+//                                                 alt={logo.alt}
+//                                             />
+//                                         </Link>
+//                                     </SheetTitle>
+//                                 </SheetHeader>
+//                                 <div className="flex flex-col gap-6 p-4">
+//                                     <Accordion
+//                                         type="single"
+//                                         collapsible
+//                                         className="flex w-full flex-col gap-4"
+//                                     >
+//                                         {menu.map((item) => renderMobileMenuItem(item))}
+//                                     </Accordion>
+//
+//                                     <div className="flex flex-col gap-3">
+//                                         {
+//                                             status === 'authenticated' ? (
+//                                                 <>
+//                                                     <button onClick={()=> signOut({callbackUrl: '/login'})}>
+//                                                         Logout
+//                                                     </button>
+//                                                 </>
+//                                             ) :
+//                                                 <>
+//                                                     <Button asChild variant="outline">
+//                                                         <Link href={auth.login.url}>{auth.login.title}</Link>
+//                                                     </Button>
+//                                                 </>
+//                                         }
+//                                     </div>
+//                                 </div>
+//                             </SheetContent>
+//                         </Sheet>
+//                     </div>
+//                 </div>
+//             </div>
+//         </section>
+//     );
+// };
+//
+// const renderMenuItem = (item) => {
+//     if (item.items) {
+//         return (
+//             <NavigationMenuItem key={item.title}>
+//                 <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+//                 <NavigationMenuContent className="bg-popover text-popover-foreground">
+//                     {item.items.map((subItem) => (
+//                         <NavigationMenuLink asChild key={subItem.title} className="w-80">
+//                             <SubMenuLink item={subItem}/>
+//                         </NavigationMenuLink>
+//                     ))}
+//                 </NavigationMenuContent>
+//             </NavigationMenuItem>
+//         );
+//     }
+//
+//     return (
+//         <NavigationMenuItem key={item.title}>
+//             <NavigationMenuLink
+//                 href={item.url}
+//                 className="bg-background hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
+//             >
+//                 {item.title}
+//             </NavigationMenuLink>
+//         </NavigationMenuItem>
+//     );
+// };
+//
+// const renderMobileMenuItem = (item) => {
+//     if (item.items) {
+//         return (
+//             <AccordionItem key={item.title} value={item.title} className="border-b-0">
+//                 <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
+//                     {item.title}
+//                 </AccordionTrigger>
+//                 <AccordionContent className="mt-2">
+//                     {item.items.map((subItem) => (
+//                         <SubMenuLink key={subItem.title} item={subItem}/>
+//                     ))}
+//                 </AccordionContent>
+//             </AccordionItem>
+//         );
+//     }
+//
+//     return (
+//         <a key={item.title} href={item.url} className="text-md font-semibold">
+//             {item.title}
+//         </a>
+//     );
+// };
+//
+// const SubMenuLink = ({item}) => {
+//     return (
+//         <a
+//             className="hover:bg-muted hover:text-accent-foreground flex select-none flex-row gap-4 rounded-md p-3 leading-none no-underline outline-none transition-colors"
+//             href={item.url}
+//         >
+//             <div className="text-foreground">{item.icon}</div>
+//             <div>
+//                 <div className="text-sm font-semibold">{item.title}</div>
+//                 {item.description && (
+//                     <p className="text-muted-foreground text-sm leading-snug">
+//                         {item.description}
+//                     </p>
+//                 )}
+//             </div>
+//         </a>
+//     );
+// };
+//
+// export default Navbar;

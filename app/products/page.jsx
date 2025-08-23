@@ -17,7 +17,7 @@ export default async function Products() {
                         <p className="text-gray-600 mb-4">{singleData.description}</p>
                         <div className="flex items-center justify-between">
                             <p className="text-2xl font-bold text-green-700-600">${singleData.price}</p>
-                            <Link href={`/products/${singleData._id}`} className="bg-green-700 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors">
+                            <Link href={`/products/${singleData._id}`} className="bg-[#7A3206] hover:[#7A3206] text-white px-4 py-2 rounded-md font-medium transition-colors">
                                 Details
                             </Link>
                         </div>
@@ -27,3 +27,5 @@ export default async function Products() {
         </div>
     )
 }
+
+
