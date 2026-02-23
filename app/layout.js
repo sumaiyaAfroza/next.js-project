@@ -6,9 +6,6 @@ import Navbar from "@/components/Navbar";
 import {Hero} from "@/components/Hero";
 import Provider from "@/components/providers/SessionProvider";
 
-
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

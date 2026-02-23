@@ -36,6 +36,7 @@ const Navbar = ({
                     menu = [
                         { title: "Home", url: "/" },
                         { title: "Products", url: "/products" },
+                        { title: "About", url:'/about'},
                         {
                             title: "Dashboard",
                             items: [
@@ -46,6 +47,7 @@ const Navbar = ({
                                 },
                             ],
                         },
+                       { title: "Contact", url: "/contact" },
                     ],
                     auth = {
                         login: { title: "Login", url: "/login" },
