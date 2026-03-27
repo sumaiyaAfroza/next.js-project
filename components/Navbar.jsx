@@ -60,7 +60,7 @@ const Navbar = ({
             <div className="container">
                 {/* Desktop Menu */}
                 <nav className="hidden justify-between lg:flex">
-                    <div className="flex ml-20 gap-96">
+                    <div className="flex mx-auto gap-96">
                         {/* Logo */}
                         <Link href={logo.url} className="flex items-center gap-2">
                             <Image
